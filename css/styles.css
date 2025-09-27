@@ -1,3 +1,14 @@
+#choropleth_map {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  margin: 0;
+  padding: 0;
+}
+
+/* Keep the old #vis for backward compatibility */
 #vis {
   position: fixed;
   top: 30px;
