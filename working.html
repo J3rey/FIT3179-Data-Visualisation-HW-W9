@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Butterfly Chart</title>
+    <title>Segmented Bar Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
 
     <!-- CSS file -->
     <link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+    
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+      }
+      
+      .vega-embed {
+        margin: 0 auto;
+      }
+      
+      .vega-embed details {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
-    <h1>Athlete Age Distribution</h1>
-    <div id="vis"></div>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px;">
+      <h1 style="text-align: center; margin-bottom: 20px;">Athlete Age Distribution</h1>
+      <div id="vis" style="display: flex; justify-content: center;"></div>
+    </div>
 
     <script type="text/javascript">
       // Load the Vega-Lite specification from external JSON file
-      vegaEmbed("#vis", "js/butterfly_chart.json")
+      vegaEmbed("#vis", "js/segmented_chart.json")
         .then(() => {
           console.log("Chart loaded successfully!");
         })
