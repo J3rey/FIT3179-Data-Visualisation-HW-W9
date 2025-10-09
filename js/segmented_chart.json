@@ -1,0 +1,116 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Athlete Age Distribution",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "anchor": "start"
+  },
+  "width": 600,
+  "height": 400,
+  "data": {
+    "url": "data/athletes_name_gender_age.csv"
+  },
+  "params": [
+    {
+      "name": "gender_selection",
+      "select": {
+        "type": "point",
+        "fields": ["gender"]
+      },
+      "bind": "legend"
+    }
+  ],
+  "transform": [
+    {
+      "bin": { "step": 5 },
+      "field": "age",
+      "as": ["age_start", "age_end"]
+    },
+    {
+      "calculate": "format(datum.age_start, 'd') + '-' + format(datum.age_end - 1, 'd')",
+      "as": "age_range"
+    },
+    {
+      "aggregate": [{ "op": "count", "as": "count" }],
+      "groupby": ["gender", "age_start", "age_end", "age_range"]
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "age_range",
+      "type": "ordinal",
+      "title": "Age Range",
+      "sort": [
+        "10-14",
+        "15-19",
+        "20-24",
+        "25-29",
+        "30-34",
+        "35-39",
+        "40-44",
+        "45-49",
+        "50-54",
+        "55-59",
+        "60-64"
+      ],
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14,
+        "titleFontWeight": "bold",
+        "labelAngle": -45
+      }
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative",
+      "title": "Number of Athletes",
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14,
+        "titleFontWeight": "bold"
+      }
+    },
+    "color": {
+      "field": "gender",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Male", "Female"],
+        "range": ["#4472C4", "#ED7D31"]
+      },
+      "legend": {
+        "title": "Gender",
+        "orient": "right",
+        "titleFontSize": 14,
+        "titleFontWeight": "bold",
+        "labelFontSize": 12,
+        "symbolSize": 200
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "gender_selection",
+        "value": 1.0
+      },
+      "value": 0.2
+    },
+    "tooltip": [
+      {
+        "field": "age_range",
+        "type": "nominal",
+        "title": "Age Range"
+      },
+      {
+        "field": "gender",
+        "type": "nominal",
+        "title": "Gender"
+      },
+      {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Number of Athletes"
+      }
+    ]
+  }
+}
