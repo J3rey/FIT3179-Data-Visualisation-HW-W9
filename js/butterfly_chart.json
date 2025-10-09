@@ -14,11 +14,19 @@
     },
     {
       "aggregate": [{ "op": "count", "as": "count" }],
-      "groupby": ["gender", "age_start"]
+      "groupby": ["gender", "age_start", "age_end"]
     },
     {
       "calculate": "datum.gender === 'Male' ? -datum.count : datum.count",
       "as": "signed_count"
+    },
+    {
+      "calculate": "abs(datum.signed_count)",
+      "as": "abs_count"
+    },
+    {
+      "calculate": "format(datum.age_start, 'd') + '-' + format(datum.age_end - 1, 'd')",
+      "as": "age_range"
     }
   ],
   "mark": "bar",
@@ -36,6 +44,23 @@
     "color": {
       "field": "gender",
       "type": "nominal"
-    }
+    },
+    "tooltip": [
+      {
+        "field": "age_range",
+        "type": "nominal",
+        "title": "Age Range"
+      },
+      {
+        "field": "gender",
+        "type": "nominal",
+        "title": "Gender"
+      },
+      {
+        "field": "abs_count",
+        "type": "quantitative",
+        "title": "Number of Athletes"
+      }
+    ]
   }
 }
