@@ -1,10 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Athlete Age Distribution by Gender",
-  "width": 500,
-  "height": 300,
+  "width": "container",
+  "height": 500,
   "data": {
-    "url": "data/athletes_name_gender_age.csv"
+    "url": "https://raw.githubusercontent.com/J3rey/FIT3179-Data-Visualisation-HW-W9/refs/heads/main/data/athletes_name_gender_age.csv"
   },
   "transform": [
     {
@@ -13,54 +12,123 @@
       "as": ["age_start", "age_end"]
     },
     {
+      "calculate": "format(datum.age_start, 'd') + '-' + format(datum.age_end - 1, 'd')",
+      "as": "age_range"
+    },
+    {
       "aggregate": [{ "op": "count", "as": "count" }],
-      "groupby": ["gender", "age_start", "age_end"]
+      "groupby": ["gender", "age_start", "age_end", "age_range"]
     },
     {
       "calculate": "datum.gender === 'Male' ? -datum.count : datum.count",
       "as": "signed_count"
-    },
-    {
-      "calculate": "abs(datum.signed_count)",
-      "as": "abs_count"
-    },
-    {
-      "calculate": "format(datum.age_start, 'd') + '-' + format(datum.age_end - 1, 'd')",
-      "as": "age_range"
     }
   ],
-  "mark": "bar",
   "encoding": {
     "y": {
-      "field": "age_start",
+      "field": "age_range",
       "type": "ordinal",
-      "title": "Age"
-    },
-    "x": {
-      "field": "signed_count",
-      "type": "quantitative",
-      "title": "Count"
-    },
-    "color": {
-      "field": "gender",
-      "type": "nominal"
-    },
-    "tooltip": [
-      {
-        "field": "age_range",
-        "type": "nominal",
-        "title": "Age Range"
-      },
-      {
-        "field": "gender",
-        "type": "nominal",
-        "title": "Gender"
-      },
-      {
-        "field": "abs_count",
-        "type": "quantitative",
-        "title": "Number of Athletes"
+      "title": "Age",
+      "sort": [
+        "10-14",
+        "15-19",
+        "20-24",
+        "25-29",
+        "30-34",
+        "35-39",
+        "40-44",
+        "45-49",
+        "50-54",
+        "55-59",
+        "60-64"
+      ],
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14,
+        "titleFontWeight": "bold"
       }
-    ]
-  }
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "signed_count",
+          "type": "quantitative",
+          "title": "Number of Athletes",
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 14,
+            "titleFontWeight": "bold",
+            "labelExpr": "abs(datum.value)"
+          }
+        },
+        "color": {
+          "field": "gender",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Male", "Female"],
+            "range": ["#4472C4", "#ED7D31"]
+          },
+          "legend": {
+            "title": "Gender",
+            "orient": "top",
+            "titleFontSize": 13,
+            "titleFontWeight": "bold",
+            "labelFontSize": 12,
+            "symbolSize": 200,
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "age_range",
+            "type": "nominal",
+            "title": "Age Range"
+          },
+          {
+            "field": "gender",
+            "type": "nominal",
+            "title": "Gender"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Number of Athletes"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -10,
+        "fontWeight": "bold",
+        "fontSize": 15
+      },
+      "encoding": {
+        "x": { "datum": -1250 },
+        "y": { "datum": "10-14" },
+        "text": { "datum": "Males" }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -10,
+        "fontWeight": "bold",
+        "fontSize": 15
+      },
+      "encoding": {
+        "x": { "datum": 1250 },
+        "y": { "datum": "10-14" },
+        "text": { "datum": "Females" }
+      }
+    }
+  ]
 }
