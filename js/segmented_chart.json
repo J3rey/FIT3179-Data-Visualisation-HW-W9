@@ -152,8 +152,8 @@
       },
       "legend": {
         "title": "Gender",
-        "orient": "right",
-        "direction": "vertical",
+        "orient": "top-right",
+        "direction": "horizontal",
         "titleFontSize": 14,
         "titleFontWeight": "bold",
         "labelFontSize": 12,
@@ -178,18 +178,55 @@
     ]
   },
 
+  "usermeta": {
+    "embedOptions": {
+      "actions": false,
+      "padding": { "top": 10, "left": 10, "right": 10, "bottom": 80 }
+    }
+  },
+
   "config": {
     "view": {
       "stroke": null,
-      "continuousWidth": 750,
-      "continuousHeight": 450
+      "fill": "white",
+      "cornerRadius": 10
     },
     "axis": {
       "labelLimit": 120,
-      "titlePadding": 15
+      "titlePadding": 15,
+      "gridColor": "#e0e0e0",
+      "domainColor": "#adb5bd",
+      "tickColor": "#adb5bd"
     },
     "bar": {
       "binSpacing": 2
+    },
+    "style": {
+      "guide-label": {
+        "fontSize": 12,
+        "fill": "#495057"
+      },
+      "guide-title": {
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "fill": "#2c3e50"
+      }
+    },
+    "legend": {
+      "cornerRadius": 5,
+      "fillColor": "#f8f9fa",
+      "strokeColor": "#dee2e6",
+      "padding": 10
+    },
+    "range": {
+      "category": [
+        "#2F7FB8",
+        "#E28E2C",
+        "#52A447",
+        "#C44E52",
+        "#8C6BB1",
+        "#FFA500"
+      ]
     }
   }
 }

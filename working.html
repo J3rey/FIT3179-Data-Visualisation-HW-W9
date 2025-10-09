@@ -1,160 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Athlete Age Distribution</title>
+    <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
 
-    <style>
-      body {
-        margin: 0;
-        padding: 20px;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f5f5f5;
-        color: #333;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-      }
-
-      .header {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .header h1 {
-        margin: 0;
-        color: #2c3e50;
-        font-size: 28px;
-        font-weight: 600;
-      }
-
-      .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-      }
-
-      .filters-section {
-        width: 100%;
-        max-width: 900px;
-        background-color: #f8f9fa;
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
-        padding: 20px;
-      }
-
-      .filters-title {
-        margin: 0 0 15px 0;
-        color: #495057;
-        font-size: 16px;
-        font-weight: 600;
-      }
-
-      .chart-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .vega-embed {
-        border-radius: 8px;
-        overflow: hidden;
-      }
-
-      .vega-embed details {
-        display: none !important;
-      }
-
-      .vega-bindings {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
-        gap: 10px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        background: none !important;
-        border: none !important;
-      }
-
-      .vega-bind {
-        margin: 0 !important;
-      }
-
-      .vega-bind label {
-        display: flex !important;
-        align-items: center !important;
-        padding: 8px 12px !important;
-        background-color: white !important;
-        border: 1px solid #dee2e6 !important;
-        border-radius: 6px !important;
-        font-size: 13px !important;
-        cursor: pointer !important;
-        transition: all 0.2s ease !important;
-        margin: 0 !important;
-      }
-
-      .vega-bind label:hover {
-        background-color: #e9ecef !important;
-        border-color: #adb5bd !important;
-      }
-
-      .vega-bind input[type="checkbox"] {
-        margin-right: 8px !important;
-        transform: scale(1.1) !important;
-      }
-    </style>
+    <!-- CSS file -->
+    <link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <h1>Athlete Age Distribution</h1>
-      </div>
-
-      <div class="content">
-        <div class="filters-section">
-          <h3 class="filters-title">Filter by Age Ranges</h3>
-          <div id="filters-container"></div>
-        </div>
-
-        <div class="chart-container">
-          <div id="vis"></div>
-        </div>
-      </div>
-    </div>
+    <div id="vis"></div>
 
     <script type="text/javascript">
-      // Load the Vega-Lite specification from external JSON file
-      vegaEmbed("#vis", "js/segmented_chart.json")
-        .then(() => {
-          console.log("Chart loaded successfully!");
-
-          // Move the filter controls to our custom container
-          setTimeout(() => {
-            const bindingsContainer = document.querySelector(".vega-bindings");
-            const filtersContainer =
-              document.getElementById("filters-container");
-
-            if (bindingsContainer && filtersContainer) {
-              // Move the bindings to our custom container
-              filtersContainer.appendChild(bindingsContainer);
-            }
-          }, 100);
+      var spec = "js/segmented_chart.json";
+      vegaEmbed("#vis", spec)
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
         })
-        .catch((error) => {
-          console.error("Error loading chart:", error);
-          document.getElementById("vis").innerHTML =
-            '<p style="color: red;">Error loading chart: ' +
-            error.message +
-            "</p>";
-        });
+        .catch(console.error);
     </script>
   </body>
 </html>
