@@ -15,6 +15,56 @@
     { "name": "chartPad", "value": 60 },
     { "name": "width", "update": "2 * chartWidth + chartPad" },
     {
+      "name": "selectedAgeGroups",
+      "value": [
+        "15-19",
+        "20-24",
+        "25-29",
+        "30-34",
+        "35-39",
+        "40-44",
+        "45-49",
+        "50-54",
+        "55-59",
+        "60-64",
+        "65-69"
+      ],
+      "bind": {
+        "input": "select",
+        "options": [
+          [
+            "15-19",
+            "20-24",
+            "25-29",
+            "30-34",
+            "35-39",
+            "40-44",
+            "45-49",
+            "50-54",
+            "55-59",
+            "60-64",
+            "65-69"
+          ],
+          ["15-19", "20-24", "25-29"],
+          ["30-34", "35-39", "40-44"],
+          ["45-49", "50-54", "55-59"],
+          ["60-64", "65-69"],
+          ["15-19", "20-24", "25-29", "30-34", "35-39"],
+          ["40-44", "45-49", "50-54", "55-59", "60-64", "65-69"]
+        ],
+        "labels": [
+          "All Ages",
+          "Young (15-29)",
+          "Middle (30-44)",
+          "Mature (45-59)",
+          "Senior (60-69)",
+          "Under 40",
+          "Over 40"
+        ],
+        "name": "Age Groups: "
+      }
+    },
+    {
       "name": "tooltip",
       "value": {},
       "on": [
@@ -40,8 +90,17 @@
           "expr": "floor(datum.age / 5) * 5"
         },
         {
+          "type": "formula",
+          "as": "ageGroupLabel",
+          "expr": "datum.ageGroup + '-' + (datum.ageGroup + 4)"
+        },
+        {
+          "type": "filter",
+          "expr": "indexof(selectedAgeGroups, datum.ageGroupLabel) >= 0"
+        },
+        {
           "type": "aggregate",
-          "groupby": ["gender", "ageGroup"],
+          "groupby": ["gender", "ageGroup", "ageGroupLabel"],
           "fields": ["age"],
           "ops": ["count"],
           "as": ["count"]
@@ -84,6 +143,34 @@
       "type": "ordinal",
       "domain": ["Male", "Female"],
       "range": ["#6c4e97", "#d5855a"]
+    }
+  ],
+
+  "legends": [
+    {
+      "fill": "c",
+      "title": "Gender",
+      "orient": "top-right",
+      "encode": {
+        "symbols": {
+          "update": {
+            "fillOpacity": { "value": 0.6 },
+            "stroke": { "value": "transparent" }
+          }
+        },
+        "labels": {
+          "update": {
+            "fontSize": { "value": 12 },
+            "fill": { "value": "#000" }
+          }
+        },
+        "title": {
+          "update": {
+            "fontSize": { "value": 14 },
+            "fontWeight": { "value": "bold" }
+          }
+        }
+      }
     }
   ],
 
