@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Summer Paris Olympics 2024</title>
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .visualization {
-      margin: 40px 0;
-    }
-    #map {
-      width: 100%;
-      height: 500px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Summer Paris Olympics 2024</h1>
-  
-  <div class="visualization">
-    <h2>Bronze Medals by Country</h2>
-    <div id="map"></div>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Summer Paris Olympics 2024</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .visualization {
+        margin: 40px 0;
+      }
+      #map {
+        width: 100%;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Summer Paris Olympics 2024</h1>
 
-  <div class="visualization">
-    <h2>Athlete Age Distribution by Gender</h2>
-    <div id="butterfly"></div>
-  </div>
+    <div class="visualization">
+      <h2>Bronze Medals by Country</h2>
+      <div id="map"></div>
+    </div>
 
-  <script>
-    vegaEmbed('#map', 'js/chloropleth_map.vg.json');
-    vegaEmbed('#butterfly', 'js/butterfly_chart.vg.json');
-  </script>
-</body>
+    <div class="visualization">
+      <h2>Athlete Age Distribution by Gender</h2>
+      <div id="butterfly"></div>
+    </div>
+
+    <script>
+      vegaEmbed("#map", "js/chloropleth_map.vg.json");
+      vegaEmbed("#butterfly", "js/butterfly_chart.vg.json");
+    </script>
+  </body>
 </html>
