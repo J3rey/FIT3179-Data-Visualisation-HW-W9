@@ -13,7 +13,15 @@
   "signals": [
     { "name": "chartWidth", "value": 250 },
     { "name": "chartPad", "value": 60 },
-    { "name": "width", "update": "2 * chartWidth + chartPad" }
+    { "name": "width", "update": "2 * chartWidth + chartPad" },
+    {
+      "name": "tooltip",
+      "value": {},
+      "on": [
+        { "events": "rect:mouseover", "update": "datum" },
+        { "events": "rect:mouseout", "update": "{}" }
+      ]
+    }
   ],
 
   "data": [
@@ -135,8 +143,16 @@
               "x2": { "scale": "x", "value": 0 },
               "y": { "scale": "y", "field": "ageGroup" },
               "height": { "scale": "y", "band": 1, "offset": -1 },
-              "fillOpacity": { "value": 0.6 },
-              "fill": { "scale": "c", "field": "gender" }
+              "fill": { "scale": "c", "field": "gender" },
+              "tooltip": {
+                "signal": "{'Gender': datum.gender, 'Age Group': datum.ageGroup + '-' + (datum.ageGroup + 4), 'Count': datum.count}"
+              }
+            },
+            "update": {
+              "fillOpacity": { "value": 0.6 }
+            },
+            "hover": {
+              "fillOpacity": { "value": 1 }
             }
           }
         }
@@ -182,8 +198,16 @@
               "x2": { "scale": "x", "value": 0 },
               "y": { "scale": "y", "field": "ageGroup" },
               "height": { "scale": "y", "band": 1, "offset": -1 },
-              "fillOpacity": { "value": 0.6 },
-              "fill": { "scale": "c", "field": "gender" }
+              "fill": { "scale": "c", "field": "gender" },
+              "tooltip": {
+                "signal": "{'Gender': datum.gender, 'Age Group': datum.ageGroup + '-' + (datum.ageGroup + 4), 'Count': datum.count}"
+              }
+            },
+            "update": {
+              "fillOpacity": { "value": 0.6 }
+            },
+            "hover": {
+              "fillOpacity": { "value": 1 }
             }
           }
         }
