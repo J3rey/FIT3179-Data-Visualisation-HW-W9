@@ -242,6 +242,22 @@
               "fillOpacity": { "value": 1 }
             }
           }
+        },
+        {
+          "type": "text",
+          "from": { "data": "females" },
+          "encode": {
+            "enter": {
+              "x": { "scale": "x", "field": "count", "offset": -5 },
+              "y": { "scale": "y", "field": "ageGroup", "band": 0.5 },
+              "text": { "signal": "datum.count" },
+              "align": { "value": "right" },
+              "baseline": { "value": "middle" },
+              "fill": { "value": "#000" },
+              "fontSize": { "value": 11 },
+              "fontWeight": { "value": "bold" }
+            }
+          }
         }
       ]
     },
@@ -295,6 +311,22 @@
             },
             "hover": {
               "fillOpacity": { "value": 1 }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": { "data": "males" },
+          "encode": {
+            "enter": {
+              "x": { "scale": "x", "field": "count", "offset": 5 },
+              "y": { "scale": "y", "field": "ageGroup", "band": 0.5 },
+              "text": { "signal": "datum.count" },
+              "align": { "value": "left" },
+              "baseline": { "value": "middle" },
+              "fill": { "value": "#000" },
+              "fontSize": { "value": 11 },
+              "fontWeight": { "value": "bold" }
             }
           }
         }
